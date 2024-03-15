@@ -1,0 +1,74 @@
+#### PPT 3 DE LA DIAPOSITIVA 26 --- EL PROGRAMA DETERMINA SI EL NUMERO TIENE PARTE DECIMAL
+
+
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+
+int main() {
+	string input;
+	cout<<"El programa determina si el numero tiene parte decimal: ";
+	cout<<"\nel alfabeto aceptado esta formado por: +,-,.,0-9";
+	while(1) {
+		cout<<"\n\ningrese un numero: ";
+		getline(cin,input);
+		char inicio = 'A', final = 'E';
+		char actual = inicio;
+		bool fin = false;
+		int contador = 0;
+	
+		while(fin==false) {
+			if(contador > input.length()-1) {
+				fin = true;
+				break;
+			}
+			
+			if(actual=='A') {
+				if(isdigit(input[contador])) { actual='C'; }
+				if(input[contador]=='-' or input[contador]=='+') { actual='B'; }
+				if(input[contador]=='.') actual='F';
+				contador++; continue;
+			}
+
+			if(actual=='B') {
+				if(isdigit(input[contador])) { actual='C'; }
+				if(input[contador]=='.' or input[contador]=='+' or input[contador]=='-') { actual='F'; }
+				contador++; continue;
+			}
+
+			if(actual=='C') {
+				if(isdigit(input[contador])) { actual='C'; }
+				if(input[contador]=='.') { actual='D'; }
+				if(input[contador]=='+' or input[contador]=='-') { actual='F'; }
+				contador++; continue;
+			}
+
+			if(actual=='D') {
+				if(isdigit(input[contador])) { actual='E'; }
+				if(input[contador]=='+' or input[contador]=='-') { actual='F'; }
+				contador++; continue;
+			}
+
+			if(actual=='E') {
+				if(isdigit(input[contador])) { actual='E'; }
+				if(input[contador]=='.' or input[contador]=='+' or input[contador]=='-') { actual='F'; }
+				contador++; continue;
+			}
+
+			if(actual=='F') {
+				if(isdigit(input[contador])) { actual='F'; }
+				if(input[contador]=='.' or input[contador]=='+' or input[contador]=='-') { actual='F'; }
+				contador++; continue;
+			}
+		}
+
+		if(actual==final) { cout<<"La cadena "<<input<<" es REAL"<<endl; }
+		else{
+			cout<<"La cadena "<<input<<" es rechazada"<<endl;
+			cout<<"estado final: "<<char(actual)<<endl; }
+	
+
+	}
+	return 0;
+}
